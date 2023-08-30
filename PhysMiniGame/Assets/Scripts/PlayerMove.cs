@@ -19,4 +19,9 @@ public class PlayerMove : MonoBehaviour
     {
         rb.velocity = new Vector2(speed * gatherInput.directionX, 0);
     }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        speed = 0;
+    }
 }
