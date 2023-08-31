@@ -16,6 +16,7 @@ public class GatherInput : MonoBehaviour
             directionX = -1;
         else
             directionX = 0;
-
+        if (Keyboard.current.escapeKey.isPressed)
+            Application.Quit();
     }
 }
