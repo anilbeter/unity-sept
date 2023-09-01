@@ -8,6 +8,7 @@ public class PlayerMoveControls : MonoBehaviour
     private GatherInput gI;
     private Rigidbody2D rb;
     private Animator anim;
+    public float jumpForce;
 
     private int direction = 1;
 
@@ -28,12 +29,22 @@ public class PlayerMoveControls : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
+        JumpPlayer();
     }
 
     private void Move()
     {
         rb.velocity = new Vector2(speed * gI.valueX, rb.velocity.y);
         Flip();
+    }
+
+    private void JumpPlayer()
+    {
+        if (gI.jumpInput)
+        {
+            rb.velocity = new Vector2(gI.valueX * speed, jumpForce);
+        }
+        gI.jumpInput = false;
     }
 
     private void Flip()

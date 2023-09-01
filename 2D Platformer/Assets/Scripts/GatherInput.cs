@@ -8,6 +8,7 @@ public class GatherInput : MonoBehaviour
 
     private Controls myControls;
     public float valueX;
+    public bool jumpInput;
 
     private void Awake()
     {
@@ -18,6 +19,9 @@ public class GatherInput : MonoBehaviour
     {
         myControls.Player.Move.performed += StartMove;
         myControls.Player.Move.canceled += StopMove;
+        myControls.Player.Jump.performed += JumpStart;
+        myControls.Player.Jump.canceled += JumpStop;
+
 
         myControls.Player.Enable();
     }
@@ -26,6 +30,8 @@ public class GatherInput : MonoBehaviour
     {
         myControls.Player.Move.performed -= StartMove;
         myControls.Player.Move.canceled -= StopMove;
+        myControls.Player.Jump.performed -= JumpStart;
+        myControls.Player.Jump.canceled -= JumpStop;
 
         myControls.Player.Disable();
     }
@@ -38,5 +44,15 @@ public class GatherInput : MonoBehaviour
     private void StopMove(InputAction.CallbackContext ctx)
     {
         valueX = 0;
+    }
+
+    private void JumpStart(InputAction.CallbackContext ctx)
+    {
+        jumpInput = true;
+    }
+
+    private void JumpStop(InputAction.CallbackContext ctx)
+    {
+        jumpInput = false;
     }
 }
