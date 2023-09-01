@@ -8,6 +8,8 @@ public class PlayerMoveControls : MonoBehaviour
     private GatherInput gI;
     private Rigidbody2D rb;
 
+    private int direction = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,21 @@ public class PlayerMoveControls : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Move();
+    }
+
+    private void Move()
+    {
         rb.velocity = new Vector2(speed * gI.valueX, rb.velocity.y);
+        Flip();
+    }
+
+    private void Flip()
+    {
+        if (direction * gI.valueX < 0)
+        {
+            direction = -direction;
+            transform.localScale = new Vector3(direction, 1, 1);
+        }
     }
 }
