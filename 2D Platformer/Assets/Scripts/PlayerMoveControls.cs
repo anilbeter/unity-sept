@@ -11,6 +11,9 @@ public class PlayerMoveControls : MonoBehaviour
     public float jumpForce;
 
     private int direction = 1;
+    // private bool doubleJump = true;
+    public int additionalJumps = 2;
+    private int resetJumpsNumber;
 
     public float rayLength;
     public LayerMask groundLayer;
@@ -24,6 +27,8 @@ public class PlayerMoveControls : MonoBehaviour
         gI = GetComponent<GatherInput>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+        resetJumpsNumber = additionalJumps;
     }
 
     // Update is called once per frame
@@ -52,6 +57,13 @@ public class PlayerMoveControls : MonoBehaviour
             if (isGrounded)
             {
                 rb.velocity = new Vector2(gI.valueX * speed, jumpForce);
+                // doubleJump = true;
+            }
+            else if (additionalJumps > 0)
+            {
+                rb.velocity = new Vector2(gI.valueX * speed, jumpForce);
+                // doubleJump = false;
+                additionalJumps -= 1;
             }
         }
         gI.jumpInput = false;
@@ -64,6 +76,8 @@ public class PlayerMoveControls : MonoBehaviour
         if (leftCheckHit || rightCheckHit)
         {
             isGrounded = true;
+            // doubleJump = false;
+            additionalJumps = resetJumpsNumber;
         }
         else
         {
