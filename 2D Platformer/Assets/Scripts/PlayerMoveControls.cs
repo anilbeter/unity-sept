@@ -16,6 +16,7 @@ public class PlayerMoveControls : MonoBehaviour
     public LayerMask groundLayer;
     public Transform leftPoint;
     public bool isGrounded = true;
+    public Transform rightPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -59,7 +60,8 @@ public class PlayerMoveControls : MonoBehaviour
     private void CheckStatus()
     {
         RaycastHit2D leftCheckHit = Physics2D.Raycast(leftPoint.position, Vector2.down, rayLength, groundLayer);
-        if (leftCheckHit)
+        RaycastHit2D rightCheckHit = Physics2D.Raycast(rightPoint.position, Vector2.down, rayLength, groundLayer);
+        if (leftCheckHit || rightCheckHit)
         {
             isGrounded = true;
         }
@@ -67,13 +69,15 @@ public class PlayerMoveControls : MonoBehaviour
         {
             isGrounded = false;
         }
-        SeeRays(leftCheckHit);
+        SeeRays(leftCheckHit, rightCheckHit);
     }
 
-    private void SeeRays(RaycastHit2D leftCheckHit)
+    private void SeeRays(RaycastHit2D leftCheckHit, RaycastHit2D rightCheckHit)
     {
         Color color1 = leftCheckHit ? Color.red : Color.green;
+        Color color2 = rightCheckHit ? Color.red : Color.green;
         Debug.DrawRay(leftPoint.position, Vector2.down * rayLength, color1);
+        Debug.DrawRay(rightPoint.position, Vector2.down * rayLength, color2);
     }
 
     private void Flip()
