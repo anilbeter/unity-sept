@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -12,11 +13,14 @@ public class PlayerStats : MonoBehaviour
     private Animator anim;
     private PlayerMoveControls playerMove;
 
+    public Image healthUI;
+
     void Start()
     {
         anim = GetComponentInParent<Animator>();
         health = maxHealth;
         playerMove = GetComponentInParent<PlayerMoveControls>();
+        UpdateHealthUI();
     }
 
     public void TakeDamage(float damage)
@@ -26,6 +30,8 @@ public class PlayerStats : MonoBehaviour
             health -= damage;
             anim.SetBool("Damage", true);
             playerMove.hasControl = false;
+
+            UpdateHealthUI();
 
             if (health == 0)
             {
@@ -52,5 +58,10 @@ public class PlayerStats : MonoBehaviour
         {
             anim.SetBool("Death", true);
         }
+    }
+
+    public void UpdateHealthUI()
+    {
+        healthUI.fillAmount = health / maxHealth;
     }
 }
