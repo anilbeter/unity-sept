@@ -9,8 +9,11 @@ public class PlayerStats : MonoBehaviour
 
     public bool canTakeDamage = true;
 
+    private Animator anim;
+
     void Start()
     {
+        anim = GetComponentInParent<Animator>();
         health = maxHealth;
     }
 
@@ -19,7 +22,7 @@ public class PlayerStats : MonoBehaviour
         if (canTakeDamage)
         {
             health -= damage;
-            // play hurt animation
+            anim.SetBool("Damage", true);
 
             if (health == 0)
             {
@@ -39,10 +42,11 @@ public class PlayerStats : MonoBehaviour
         if (health > 0)
         {
             canTakeDamage = true;
+            anim.SetBool("Damage", false);
         }
         else
         {
-            // play death animation
+            anim.SetBool("Death", true);
         }
     }
 }
