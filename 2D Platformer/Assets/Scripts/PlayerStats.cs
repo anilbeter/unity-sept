@@ -7,6 +7,8 @@ public class PlayerStats : MonoBehaviour
     public float maxHealth;
     public float health;
 
+    public bool canTakeDamage = true;
+
     void Start()
     {
         health = maxHealth;
@@ -15,14 +17,33 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        health -= damage;
-        // play hurt animation
-
-        if (health == 0)
+        if (canTakeDamage)
         {
-            GetComponent<PolygonCollider2D>().enabled = false;
-            GetComponentInParent<GatherInput>().DisableControls();
-            Debug.Log("Player is dead");
+            health -= damage;
+            // play hurt animation
+
+            if (health == 0)
+            {
+                GetComponent<PolygonCollider2D>().enabled = false;
+                GetComponentInParent<GatherInput>().DisableControls();
+                Debug.Log("Player is dead");
+            }
+
+            StartCoroutine(DamagePrevention());
+        }
+    }
+
+    private IEnumerator DamagePrevention()
+    {
+        canTakeDamage = false;
+        yield return new WaitForSeconds(0.15f);
+        if (health > 0)
+        {
+            canTakeDamage = true;
+        }
+        else
+        {
+            // play death animation
         }
     }
 }
