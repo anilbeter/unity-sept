@@ -21,6 +21,9 @@ public class PlayerMoveControls : MonoBehaviour
     public bool isGrounded = true;
     public Transform rightPoint;
 
+    private bool knockBack = false;
+    public bool hasControl = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,9 +42,12 @@ public class PlayerMoveControls : MonoBehaviour
 
     private void FixedUpdate()
     {
+        CheckStatus();
+        if (knockBack || !hasControl)
+            return;
+        // Eğer knockback doğruysa, Move and JumpPlayer methodları çalışmayacak. return; bu işe yarıyor
         Move();
         JumpPlayer();
-        CheckStatus();
     }
 
     private void Move()
@@ -108,5 +114,25 @@ public class PlayerMoveControls : MonoBehaviour
         anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
         anim.SetFloat("verticalSpeed", rb.velocity.y);
         anim.SetBool("isGrounded", isGrounded);
+    }
+
+    public IEnumerator KnockBack(float forceX, float forceY, float duration, Transform otherObject)
+    {
+        int knockBackDirection;
+        if (transform.position.x < otherObject.position.x)
+        {
+            knockBackDirection = -1;
+        }
+        else
+        {
+            knockBackDirection = 1;
+        }
+        knockBack = true;
+        rb.velocity = Vector2.zero;
+        Vector2 theForce = new Vector2(knockBackDirection * forceX, forceY);
+        rb.AddForce(theForce, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(duration);
+        knockBack = false;
+        rb.velocity = Vector2.zero;
     }
 }

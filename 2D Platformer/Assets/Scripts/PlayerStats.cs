@@ -10,11 +10,13 @@ public class PlayerStats : MonoBehaviour
     public bool canTakeDamage = true;
 
     private Animator anim;
+    private PlayerMoveControls playerMove;
 
     void Start()
     {
         anim = GetComponentInParent<Animator>();
         health = maxHealth;
+        playerMove = GetComponentInParent<PlayerMoveControls>();
     }
 
     public void TakeDamage(float damage)
@@ -23,6 +25,7 @@ public class PlayerStats : MonoBehaviour
         {
             health -= damage;
             anim.SetBool("Damage", true);
+            playerMove.hasControl = false;
 
             if (health == 0)
             {
@@ -42,6 +45,7 @@ public class PlayerStats : MonoBehaviour
         if (health > 0)
         {
             canTakeDamage = true;
+            playerMove.hasControl = true;
             anim.SetBool("Damage", false);
         }
         else
