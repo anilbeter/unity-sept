@@ -12,6 +12,12 @@ public class HealthPickUp : MonoBehaviour
         {
             PlayerStats playerStats = collision.GetComponentInChildren<PlayerStats>();
 
+            // if player has max health, then don't take the health.
+            if (playerStats.health == playerStats.maxHealth)
+            {
+                return;
+            }
+
             playerStats.IncreaseHealth(heal);
             Destroy(gameObject);
         }
