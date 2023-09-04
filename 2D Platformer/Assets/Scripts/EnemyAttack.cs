@@ -13,6 +13,14 @@ public class EnemyAttack : MonoBehaviour
         {
             playerStats = collision.GetComponent<PlayerStats>();
             playerStats.TakeDamage(damage);
+
+            SpecialAttack();
         }
+    }
+
+    // virtual çünkü child'da bu fonksiyonun üzerine yazmam gerek, tekrar editlicem yani bunu
+    public virtual void SpecialAttack()
+    {
+
     }
 }
