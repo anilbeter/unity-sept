@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float health;
+
+    // protected olan variablelar sadece parent ve child tarafından erişilebilir. Inspector'dan erişmem mümkün değil
+    protected Rigidbody2D rb;
+    protected Animator anim;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+    }
+
+
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

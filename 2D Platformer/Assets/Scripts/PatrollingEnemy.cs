@@ -11,9 +11,8 @@ public class PatrollingEnemy : Enemy
 
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-
+        rb.velocity = new Vector2(-1, rb.velocity.y);
     }
 }
