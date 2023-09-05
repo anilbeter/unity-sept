@@ -4,14 +4,39 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private static GameManager GM;
+    private Fader fader;
+
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if (GM == null)
+        {
+            GM = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Start()
     {
 
+    }
+
+    public static void RegisterFader(Fader fD)
+    {
+        if (GM == null)
+        {
+            return;
+        }
+        GM.fader = fD;
+    }
+
+    public static void ManagerLoadLevel(int index)
+    {
+        GM.fader.SetLevel(index);
     }
 
 }
