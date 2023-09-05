@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
+    public Fader fader;
     public int lvlToLoad;
 
 
@@ -14,6 +15,8 @@ public class Door : MonoBehaviour
         {
             GetComponent<BoxCollider2D>().enabled = false;
             collision.GetComponent<GatherInput>().DisableControls();
+
+            fader.SetLevel(lvlToLoad);
         }
     }
 }

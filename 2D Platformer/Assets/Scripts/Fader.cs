@@ -14,7 +14,7 @@ public class Fader : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    public void SetLvl(int lvl)
+    public void SetLevel(int lvl)
     {
         lvlToLoad = lvl;
         anim.SetTrigger("Fade");
