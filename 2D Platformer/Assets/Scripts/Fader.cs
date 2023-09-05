@@ -24,4 +24,16 @@ public class Fader : MonoBehaviour
     {
         SceneManager.LoadScene(lvlToLoad);
     }
+
+    private void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    // When I call RestartLevel function, actually I call Restart function with 1.5s delay
+    public void RestartLevel()
+    {
+        // 1.5f -> 1.5s delay
+        Invoke("Restart", 1.5f);
+    }
 }
