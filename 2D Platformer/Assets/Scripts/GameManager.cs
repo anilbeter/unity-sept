@@ -36,7 +36,15 @@ public class GameManager : MonoBehaviour
 
     public static void ManagerLoadLevel(int index)
     {
+        if (GM == null)
+            return;
         GM.fader.SetLevel(index);
     }
 
+    public static void ManagerRestartLevel()
+    {
+        if (GM == null)
+            return;
+        GM.fader.RestartLevel();
+    }
 }

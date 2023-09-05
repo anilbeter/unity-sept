@@ -37,7 +37,7 @@ public class PlayerStats : MonoBehaviour
             {
                 GetComponent<PolygonCollider2D>().enabled = false;
                 GetComponentInParent<GatherInput>().DisableControls();
-                Debug.Log("Player is dead");
+                GameManager.ManagerRestartLevel();
             }
 
             StartCoroutine(DamagePrevention());
