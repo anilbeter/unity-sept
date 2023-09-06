@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     private Fader fader;
     private Door theDoor;
 
+    private List<Gem> gems;
+
     void Awake()
     {
         if (GM == null)
@@ -19,6 +21,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        gems = new List<Gem>();
     }
 
     public static void RegisterDoor(Door door)
