@@ -18,8 +18,10 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         anim = GetComponentInParent<Animator>();
-        health = maxHealth;
         playerMove = GetComponentInParent<PlayerMoveControls>();
+        // health = maxHealth;
+        health = PlayerPrefs.GetFloat("HealthKey", maxHealth);
+
         UpdateHealthUI();
     }
 
@@ -37,6 +39,8 @@ public class PlayerStats : MonoBehaviour
             {
                 GetComponent<PolygonCollider2D>().enabled = false;
                 GetComponentInParent<GatherInput>().DisableControls();
+
+                PlayerPrefs.SetFloat("HealthKey", maxHealth);
                 GameManager.ManagerRestartLevel();
             }
 
@@ -73,5 +77,11 @@ public class PlayerStats : MonoBehaviour
             health = maxHealth;
         }
         UpdateHealthUI();
+    }
+
+    // reset health when player exit from game
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.DeleteKey("HealthKey");
     }
 }

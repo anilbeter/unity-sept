@@ -23,8 +23,9 @@ public class Door : MonoBehaviour
             GetComponent<BoxCollider2D>().enabled = false;
             collision.GetComponent<GatherInput>().DisableControls();
 
-            // fader.RestartLevel();
-            // fader.SetLevel(lvlToLoad);
+            PlayerStats playerStats = collision.GetComponentInChildren<PlayerStats>();
+            PlayerPrefs.SetFloat("HealthKey", playerStats.health);
+
             GameManager.ManagerLoadLevel(lvlToLoad);
         }
     }
