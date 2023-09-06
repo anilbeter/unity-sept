@@ -89,7 +89,7 @@ public class PlayerMoveControls : MonoBehaviour
         {
             isGrounded = false;
         }
-        SeeRays(leftCheckHit, rightCheckHit);
+        // SeeRays(leftCheckHit, rightCheckHit);
     }
 
     private void SeeRays(RaycastHit2D leftCheckHit, RaycastHit2D rightCheckHit)
