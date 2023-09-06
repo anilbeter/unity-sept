@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager GM;
     private Fader fader;
+    private Door theDoor;
 
     void Awake()
     {
@@ -20,9 +21,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
+    public static void RegisterDoor(Door door)
     {
-
+        if (GM = null)
+            return;
+        GM.theDoor = door;
     }
 
     public static void RegisterFader(Fader fD)

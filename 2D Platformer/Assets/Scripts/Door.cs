@@ -7,6 +7,14 @@ public class Door : MonoBehaviour
 {
     public int lvlToLoad;
 
+    public Sprite unlockedDoor;
+    public BoxCollider2D boxCol;
+
+    void Start()
+    {
+        boxCol = GetComponent<BoxCollider2D>();
+        GameManager.RegisterDoor(this);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -19,5 +27,11 @@ public class Door : MonoBehaviour
             // fader.SetLevel(lvlToLoad);
             GameManager.ManagerLoadLevel(lvlToLoad);
         }
+    }
+
+    public void UnlockDoor()
+    {
+        GetComponent<SpriteRenderer>().sprite = unlockedDoor;
+        boxCol.enabled = true;
     }
 }
