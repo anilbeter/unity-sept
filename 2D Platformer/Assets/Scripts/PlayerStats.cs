@@ -40,6 +40,7 @@ public class PlayerStats : MonoBehaviour
                 GetComponent<PolygonCollider2D>().enabled = false;
                 GetComponentInParent<GatherInput>().DisableControls();
 
+                PlayerPrefs.SetInt("GemNumber", 0);
                 PlayerPrefs.SetFloat("HealthKey", maxHealth);
                 GameManager.ManagerRestartLevel();
             }

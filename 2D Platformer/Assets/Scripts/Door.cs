@@ -26,6 +26,9 @@ public class Door : MonoBehaviour
             PlayerStats playerStats = collision.GetComponentInChildren<PlayerStats>();
             PlayerPrefs.SetFloat("HealthKey", playerStats.health);
 
+            PlayerCollectables playerCollectables = collision.GetComponent<PlayerCollectables>();
+            PlayerPrefs.SetInt("GemNumber", playerCollectables.gemNumber);
+
             GameManager.ManagerLoadLevel(lvlToLoad);
         }
     }
