@@ -54,4 +54,13 @@ public class GameManager : MonoBehaviour
             return;
         GM.fader.RestartLevel();
     }
+
+    public static void RegisterGem(Gem gem)
+    {
+        if (GM == null)
+            return;
+
+        if (!GM.gems.Contains(gem))
+            GM.gems.Add(gem);
+    }
 }
