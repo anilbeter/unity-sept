@@ -63,4 +63,14 @@ public class GameManager : MonoBehaviour
         if (!GM.gems.Contains(gem))
             GM.gems.Add(gem);
     }
+
+    public static void RemoveGemFromList(Gem gem)
+    {
+        if (GM == null)
+            return;
+
+        GM.gems.Remove(gem);
+        if (GM.gems.Count == 0)
+            GM.theDoor.UnlockDoor();
+    }
 }
