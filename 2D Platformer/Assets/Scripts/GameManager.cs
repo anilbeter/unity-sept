@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
     {
         if (GM == null)
             return;
+        GM.gems.Clear();
         GM.fader.RestartLevel();
     }
 
