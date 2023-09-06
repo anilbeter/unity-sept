@@ -6,7 +6,7 @@ public class Gem : MonoBehaviour
 {
     void Start()
     {
-
+        GameManager.RegisterGem(this);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -19,6 +19,8 @@ public class Gem : MonoBehaviour
             GetComponent<SpriteRenderer>().enabled = false;
             GetComponent<CircleCollider2D>().enabled = false;
             // Destroy(gameObject);
+
+            GameManager.RemoveGemFromList(this);
         }
     }
 
