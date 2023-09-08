@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
 
         movingInput = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.velocity = new(rb.velocity.x, jumpForce);
         }
