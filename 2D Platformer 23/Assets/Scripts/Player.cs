@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public LayerMask whatIsGround;
     public float groundCheckDistance;
     private bool isGrounded;
+    private bool canDoubleJump;
 
     void Start()
     {
@@ -22,17 +23,42 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        MoveHorizontally();
         CollisionCheck();
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+
+        InputChecks();
+
+        if (isGrounded)
         {
+            canDoubleJump = true;
+        }
+        MoveHorizontally();
+    }
+
+    private void InputChecks()
+    {
+        movingInput = Input.GetAxisRaw("Horizontal");
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            JumpButton();
+        }
+    }
+
+    private void JumpButton()
+    {
+        if (isGrounded)
+        {
+            Jump();
+        }
+        else if (canDoubleJump)
+        {
+            canDoubleJump = false;
             Jump();
         }
     }
 
     private void MoveHorizontally()
     {
-        movingInput = Input.GetAxisRaw("Horizontal");
+
         rb.velocity = new Vector2(moveSpeed * movingInput, rb.velocity.y);
     }
 
