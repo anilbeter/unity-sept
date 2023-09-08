@@ -22,16 +22,28 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
-
-        movingInput = Input.GetAxisRaw("Horizontal");
-
+        MoveHorizontally();
+        CollisionCheck();
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            rb.velocity = new(rb.velocity.x, jumpForce);
+            Jump();
         }
+    }
 
+    private void MoveHorizontally()
+    {
+        movingInput = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(moveSpeed * movingInput, rb.velocity.y);
+    }
+
+    private void Jump()
+    {
+        rb.velocity = new(rb.velocity.x, jumpForce);
+    }
+
+    private void CollisionCheck()
+    {
+        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
     }
 
     private void OnDrawGizmos()
