@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -14,11 +15,11 @@ public class Player : MonoBehaviour
     public LayerMask whatIsGround;
     public float groundCheckDistance;
     public float wallCheckDistance;
-    private bool canWallSlide;
-    private bool isWallSliding;
     private bool isGrounded;
     private bool canDoubleJump;
     private bool isTouchWall;
+    private bool canWallSlide;
+    private bool isWallSliding;
 
 
     private Rigidbody2D rb;
@@ -45,6 +46,9 @@ public class Player : MonoBehaviour
         if (isGrounded)
             canDoubleJump = true;
         MoveHorizontally();
+
+        if (canWallSlide)
+            isWallSliding = true;
     }
 
     private void AnimationControllers()
@@ -106,6 +110,9 @@ public class Player : MonoBehaviour
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
 
         isTouchWall = Physics2D.Raycast(transform.position, Vector2.right * facingDirection, wallCheckDistance, whatIsGround);
+        // rb.velocity.y < 0 means player is falling
+        if (isTouchWall && rb.velocity.y < 0)
+            canWallSlide = true;
     }
 
     private void OnDrawGizmos()
