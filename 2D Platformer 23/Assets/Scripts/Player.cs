@@ -14,6 +14,9 @@ public class Player : MonoBehaviour
     public LayerMask whatIsGround;
     public float groundCheckDistance;
     public float wallCheckDistance;
+    private bool canWallSlide;
+    private bool isWallSliding;
+
 
     private Rigidbody2D rb;
     private bool isGrounded;
