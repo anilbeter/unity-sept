@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     private bool isTouchWall;
     private bool canWallSlide;
     private bool isWallSliding;
+    private bool canMove;
 
 
     private Rigidbody2D rb;
@@ -49,7 +50,10 @@ public class Player : MonoBehaviour
         InputChecks();
 
         if (isGrounded)
+        {
             canDoubleJump = true;
+            canMove = true;
+        }
 
 
         if (canWallSlide)
@@ -89,8 +93,8 @@ public class Player : MonoBehaviour
 
     private void MoveHorizontally()
     {
-
-        rb.velocity = new Vector2(moveSpeed * movingInput, rb.velocity.y);
+        if (canMove)
+            rb.velocity = new Vector2(moveSpeed * movingInput, rb.velocity.y);
     }
 
     private void Jump()
@@ -115,6 +119,7 @@ public class Player : MonoBehaviour
 
     private void WallJump()
     {
+        canMove = false;
         rb.velocity = new(5 * -facingDirection, jumpForce);
     }
 
