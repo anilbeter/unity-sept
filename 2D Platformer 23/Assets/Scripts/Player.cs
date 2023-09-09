@@ -28,8 +28,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        bool isMoving = rb.velocity.x != 0;
-        anim.SetBool("isMoving", isMoving);
+        AnimationControllers();
 
         CollisionCheck();
 
@@ -40,6 +39,12 @@ public class Player : MonoBehaviour
             canDoubleJump = true;
         }
         MoveHorizontally();
+    }
+
+    private void AnimationControllers()
+    {
+        bool isMoving = rb.velocity.x != 0;
+        anim.SetBool("isMoving", isMoving);
     }
 
     private void InputChecks()
