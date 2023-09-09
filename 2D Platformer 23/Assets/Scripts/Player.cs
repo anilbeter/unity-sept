@@ -38,9 +38,7 @@ public class Player : MonoBehaviour
         InputChecks();
 
         if (isGrounded)
-        {
             canDoubleJump = true;
-        }
         MoveHorizontally();
     }
 
@@ -57,22 +55,17 @@ public class Player : MonoBehaviour
     {
         movingInput = Input.GetAxisRaw("Horizontal");
         if (Input.GetKeyDown(KeyCode.Space))
-        {
             JumpButton();
-        }
     }
 
     private void JumpButton()
     {
         if (isGrounded)
-        {
             Jump();
-        }
+
         else if (canDoubleJump)
-        {
             canDoubleJump = false;
-            Jump();
-        }
+        Jump();
     }
 
     private void MoveHorizontally()
@@ -96,13 +89,11 @@ public class Player : MonoBehaviour
     private void FlipController()
     {
         if (facingRight && movingInput < 0)
-        {
             Flip();
-        }
+
         else if (!facingRight && movingInput > 0)
-        {
             Flip();
-        }
+
     }
 
     private void CollisionCheck()
