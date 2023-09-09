@@ -48,7 +48,11 @@ public class Player : MonoBehaviour
         MoveHorizontally();
 
         if (canWallSlide)
+        {
             isWallSliding = true;
+            // Player will slower slide with rb.velocity.y * 0.1f code. I changed his y speed to times 1/10.
+            rb.velocity = new(rb.velocity.x, rb.velocity.y * 0.1f);
+        }
     }
 
     private void AnimationControllers()
@@ -115,6 +119,8 @@ public class Player : MonoBehaviour
         // rb.velocity.y < 0 means player is falling
         if (isTouchWall && rb.velocity.y < 0)
             canWallSlide = true;
+        else if (!isTouchWall && rb.velocity.y < 0)
+            canWallSlide = false;
     }
 
     private void OnDrawGizmos()
