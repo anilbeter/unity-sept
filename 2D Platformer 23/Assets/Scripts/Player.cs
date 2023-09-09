@@ -14,15 +14,20 @@ public class Player : MonoBehaviour
     public float groundCheckDistance;
     private bool isGrounded;
     private bool canDoubleJump;
+    private Animator anim;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
 
     void Update()
     {
+        bool isMoving = rb.velocity.x != 0;
+        anim.SetBool("isMoving", isMoving);
+
         CollisionCheck();
 
         InputChecks();
