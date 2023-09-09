@@ -16,13 +16,13 @@ public class Player : MonoBehaviour
     public float wallCheckDistance;
     private bool canWallSlide;
     private bool isWallSliding;
+    private bool isGrounded;
+    private bool canDoubleJump;
+    private bool isTouchWall;
 
 
     private Rigidbody2D rb;
-    private bool isGrounded;
-    private bool canDoubleJump;
     private Animator anim;
-    private bool isTouchWall;
 
     private bool facingRight = true;
     private int facingDirection = 1;
