@@ -124,7 +124,7 @@ public class Player : MonoBehaviour
         // rb.velocity.y < 0 means player is falling
         if (isTouchWall && rb.velocity.y < 0)
             canWallSlide = true;
-        else if (!isTouchWall && rb.velocity.y < 0)
+        if (!isTouchWall)
             canWallSlide = false;
     }
 
