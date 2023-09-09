@@ -115,6 +115,7 @@ public class Player : MonoBehaviour
             canDoubleJump = false;
             Jump();
         }
+        canWallSlide = false; // line 59'daki conditionu devre dışı bırakmak için
     }
 
     private void WallJump()
