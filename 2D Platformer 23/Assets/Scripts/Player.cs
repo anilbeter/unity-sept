@@ -6,8 +6,10 @@ public class Player : MonoBehaviour
 {
     private float movingInput;
 
+    [Header("Move Info")]
     public float moveSpeed;
     public float jumpForce;
+
     private Rigidbody2D rb;
 
     public LayerMask whatIsGround;
