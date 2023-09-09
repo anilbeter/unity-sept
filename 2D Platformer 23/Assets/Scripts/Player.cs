@@ -73,8 +73,10 @@ public class Player : MonoBehaviour
             Jump();
 
         else if (canDoubleJump)
+        {
             canDoubleJump = false;
-        Jump();
+            Jump();
+        }
     }
 
     private void MoveHorizontally()
