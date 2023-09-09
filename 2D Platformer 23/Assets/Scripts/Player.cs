@@ -58,6 +58,11 @@ public class Player : MonoBehaviour
             // Player will slower slide with rb.velocity.y * 0.1f code. I changed his y speed to times 1/10.
             rb.velocity = new(rb.velocity.x, rb.velocity.y * 0.1f);
         }
+
+        if (!isTouchWall)
+        {
+            isWallSliding = false;
+        }
     }
 
     private void AnimationControllers()
@@ -67,6 +72,7 @@ public class Player : MonoBehaviour
 
         anim.SetBool("isGrounded", isGrounded);
         anim.SetFloat("yVelocity", rb.velocity.y);
+        anim.SetBool("isSliding", isWallSliding);
     }
 
     private void InputChecks()
