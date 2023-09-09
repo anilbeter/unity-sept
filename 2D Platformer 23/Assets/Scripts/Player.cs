@@ -13,11 +13,13 @@ public class Player : MonoBehaviour
     [Header("Collision Info")]
     public LayerMask whatIsGround;
     public float groundCheckDistance;
+    public float wallCheckDistance;
 
     private Rigidbody2D rb;
     private bool isGrounded;
     private bool canDoubleJump;
     private Animator anim;
+    private bool isTouchWall;
 
     private bool facingRight = true;
     private int facingDirection = 1;
@@ -99,10 +101,14 @@ public class Player : MonoBehaviour
     private void CollisionCheck()
     {
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
+
+        isTouchWall = Physics2D.Raycast(transform.position, Vector2.right * facingDirection, wallCheckDistance, whatIsGround);
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y - groundCheckDistance, transform.position.z));
+
+        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x + wallCheckDistance, transform.position.y, transform.position.z));
     }
 }
