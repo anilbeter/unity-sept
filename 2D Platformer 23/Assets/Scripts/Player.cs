@@ -72,6 +72,11 @@ public class Player : MonoBehaviour
     private void InputChecks()
     {
         movingInput = Input.GetAxisRaw("Horizontal");
+
+        // when player press either s or down arrow keys, then immediately stop sliding
+        if (Input.GetAxis("Vertical") < 0)
+            canWallSlide = false;
+
         if (Input.GetKeyDown(KeyCode.Space))
             JumpButton();
     }
