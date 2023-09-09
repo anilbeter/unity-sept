@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     private bool canWallSlide;
     private bool isWallSliding;
     private bool canMove;
-    public int wallJumpForce;
+    public Vector2 wallJumpDirection;
 
 
     private Rigidbody2D rb;
@@ -122,7 +122,7 @@ public class Player : MonoBehaviour
     private void WallJump()
     {
         canMove = false;
-        rb.velocity = new(wallJumpForce * -facingDirection, jumpForce);
+        rb.velocity = new(wallJumpDirection.x * -facingDirection, wallJumpDirection.y);
     }
 
     private void Flip()
