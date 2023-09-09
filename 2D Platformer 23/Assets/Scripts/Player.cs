@@ -35,6 +35,11 @@ public class Player : MonoBehaviour
     }
 
 
+    private void FixedUpdate()
+    {
+        MoveHorizontally();
+    }
+
     void Update()
     {
         AnimationControllers();
@@ -45,7 +50,7 @@ public class Player : MonoBehaviour
 
         if (isGrounded)
             canDoubleJump = true;
-        MoveHorizontally();
+
 
         if (canWallSlide)
         {
