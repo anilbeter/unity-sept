@@ -19,6 +19,9 @@ public class Player : MonoBehaviour
     private bool canDoubleJump;
     private Animator anim;
 
+    private bool facingRight = true;
+    private int facingDirection = 1;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -29,7 +32,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         AnimationControllers();
-
+        FlipController();
         CollisionCheck();
 
         InputChecks();
@@ -81,6 +84,25 @@ public class Player : MonoBehaviour
     private void Jump()
     {
         rb.velocity = new(rb.velocity.x, jumpForce);
+    }
+
+    private void Flip()
+    {
+        facingDirection *= -1;
+        facingRight = !facingRight;
+        transform.Rotate(0, -180, 0);
+    }
+
+    private void FlipController()
+    {
+        if (facingRight && movingInput < 0)
+        {
+            Flip();
+        }
+        else if (!facingRight && movingInput > 0)
+        {
+            Flip();
+        }
     }
 
     private void CollisionCheck()
