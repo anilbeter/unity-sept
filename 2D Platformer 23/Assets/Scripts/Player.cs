@@ -87,18 +87,6 @@ public class Player : MonoBehaviour
             JumpButton();
     }
 
-    private void JumpButton()
-    {
-        if (isGrounded)
-            Jump();
-
-        else if (canDoubleJump)
-        {
-            canDoubleJump = false;
-            Jump();
-        }
-    }
-
     private void MoveHorizontally()
     {
 
@@ -108,6 +96,26 @@ public class Player : MonoBehaviour
     private void Jump()
     {
         rb.velocity = new(rb.velocity.x, jumpForce);
+    }
+
+    private void JumpButton()
+    {
+        if (isWallSliding)
+            WallJump();
+
+        else if (isGrounded)
+            Jump();
+
+        else if (canDoubleJump)
+        {
+            canDoubleJump = false;
+            Jump();
+        }
+    }
+
+    private void WallJump()
+    {
+        rb.velocity = new(5 * -facingDirection, jumpForce);
     }
 
     private void Flip()
