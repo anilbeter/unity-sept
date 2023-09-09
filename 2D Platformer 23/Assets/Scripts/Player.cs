@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        MoveHorizontally();
+
     }
 
     void Update()
@@ -63,11 +63,7 @@ public class Player : MonoBehaviour
             // Player will slower slide with rb.velocity.y * 0.1f code. I changed his y speed to times 1/10.
             rb.velocity = new(rb.velocity.x, rb.velocity.y * 0.1f);
         }
-
-        if (!isTouchWall)
-        {
-            isWallSliding = false;
-        }
+        MoveHorizontally();
     }
 
     private void AnimationControllers()
@@ -78,6 +74,7 @@ public class Player : MonoBehaviour
         anim.SetBool("isGrounded", isGrounded);
         anim.SetFloat("yVelocity", rb.velocity.y);
         anim.SetBool("isSliding", isWallSliding);
+        anim.SetBool("isWallDetected", isTouchWall);
     }
 
     private void InputChecks()
@@ -134,10 +131,10 @@ public class Player : MonoBehaviour
 
     private void FlipController()
     {
-        if (facingRight && movingInput < 0)
+        if (facingRight && rb.velocity.x < 0)
             Flip();
 
-        else if (!facingRight && movingInput > 0)
+        else if (!facingRight && rb.velocity.x > 0)
             Flip();
 
     }
@@ -151,7 +148,10 @@ public class Player : MonoBehaviour
         if (isTouchWall && rb.velocity.y < 0)
             canWallSlide = true;
         if (!isTouchWall)
+        {
             canWallSlide = false;
+            isWallSliding = false;
+        }
     }
 
     private void OnDrawGizmos()
