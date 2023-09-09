@@ -118,7 +118,6 @@ public class Player : MonoBehaviour
 
     private void WallJump()
     {
-        canMove = false;
         rb.velocity = new(wallJumpDirection.x * -facingDirection, wallJumpDirection.y);
     }
 
