@@ -10,10 +10,11 @@ public class Player : MonoBehaviour
     public float moveSpeed;
     public float jumpForce;
 
-    private Rigidbody2D rb;
-
+    [Header("Collision Info")]
     public LayerMask whatIsGround;
     public float groundCheckDistance;
+
+    private Rigidbody2D rb;
     private bool isGrounded;
     private bool canDoubleJump;
     private Animator anim;
